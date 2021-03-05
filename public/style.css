@@ -1,0 +1,92 @@
+* {
+    height: auto;
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    /* background-color: #121212; */
+    /* border-radius: 100px; */
+}
+
+.list {
+    /* clip-path: rectangle(10px, 10px, 50px, 50px, 5px, 5px); */
+    position: absolute;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    /* bottom: 50px; */
+    left: 10%;
+    right: 10%;
+    width: 80%;
+    /* text-align: center; */
+}
+
+.title {
+    background-color: #222222;
+    color: white;
+    border: 1px;
+    border-color: gray;
+    border-style: solid;
+    padding: 5px;
+    font-size: 150%;
+    display: flex;
+}
+
+.title:hover {
+    background-color: rgb(79, 75, 94);
+}
+
+.light {
+    background-color: rgb(48, 48, 48);
+}
+
+
+.filledBox {
+    float: left;
+    position: relative;
+    top: 2px;
+    margin-right: 5px;
+    width: 10px;
+    height: 10px;
+    background: #ffffff;
+}
+
+.file {
+    position: relative;
+    padding-right: .2em;
+    float: left;
+    top: 3px;
+    width: 1em;
+    height: auto;
+    /* padding-right: 5px; */
+}
+
+.name{
+    flex: 1;
+    position: relative;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 100%;
+    /* border-style: solid; */
+    /* float: left; */
+    /* cursor: col-resize; */
+}
+.size{
+    vertical-align: middle;
+    position: relative;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 0%;
+    /* border-style: solid; */
+}
+
+.slider{
+    position: absolute;
+    width: 10px;
+    height: 100px;
+    /* right: 60%; */
+    left: 114;
+    border-style: solid;
+    cursor: col-resize;
+    
+}

@@ -1,0 +1,98 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="style.css">
+    <title>SOMETHING</title>
+    <script src="jquery.js"></script>
+</head>
+
+<body>
+    <div id="grid" class="list">
+        <div id="topbar" class="title"
+            style="border-top-left-radius: 20px;border-top-right-radius: 20px; height: 100px;">
+            <!-- <div id="slider" class="slider" draggable="true"></div>
+            <script>
+                let slider = document.getElementById('slider')
+                slider.onmouseenter = (evt) => {
+                    console.log(evt);
+                    var x = (evt.pageX - $('#topbar').offset().left)
+                    var y = (evt.pageY - $('#topbar').offset().top)
+                    
+                    console.log(getComputedStyle(document.querySelector('.title')).height)
+                }
+
+                dragElement(document.getElementById("slider"));
+
+                function dragElement(elmnt) {
+                    var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+                    if (document.getElementById(elmnt.id + "header")) {
+                        // if present, the header is where you move the DIV from:
+                        document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
+                    } else {
+                        // otherwise, move the DIV from anywhere inside the DIV:
+                        elmnt.onmousedown = dragMouseDown;
+                    }
+
+                    function dragMouseDown(e) {
+                        e = e || window.event;
+                        e.preventDefault();
+                        // get the mouse cursor position at startup:
+                        pos3 = e.clientX;
+                        pos4 = e.clientY;
+                        document.onmouseup = closeDragElement;
+                        // call a function whenever the cursor moves:
+                        document.onmousemove = elementDrag;
+                    }
+
+                    function elementDrag(e) {
+                        e = e || window.event;
+                        e.preventDefault();
+                        // calculate the new cursor position:
+                        pos1 = pos3 - e.clientX;
+                        pos2 = pos4 - e.clientY;
+                        pos3 = e.clientX;
+                        pos4 = e.clientY;
+                        let ratio = (elmnt.offsetLeft - pos1)/getComputedStyle(document.querySelector('.title')).width.slice(0, -2);
+                        if(ratio < 1 && ratio > 0) elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+                        
+                        // for (let i = 0; i < names.length; i++) {
+                        //     const t = names.item(i).;
+                        //     console.log(t);
+                        //     // t.style.width = ratio*100 + "px"
+                        // }
+                        // set the element's new position:
+                        // elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+                    }
+
+                    function closeDragElement() {
+                        // stop moving when mouse button is released:
+                        document.onmouseup = null;
+                        document.onmousemove = null;
+                    }
+                }
+
+            </script> -->
+        </div>
+        <!-- <p>heyy</p> -->
+        <!-- <div class="elements">
+                <h1>test</h1>
+            </div> -->
+    </div>
+    <div
+        style="position: relative; width: 100px; height: 100px; text-overflow: ellipsis;border-style: solid;  white-space: nowrap;overflow: hidden;">
+        <a> ipsum dolor sit amet consectetur adipisicing elit. Numquam nostrum a deleniti dolore id aut voluptas
+            veritatis modi! Corporis ipsum consequatur voluptatum dolorem dolores quod culpa unde suscipit rerum
+            harum!</a></div>
+    <script>
+        // {    let x = new URLSearchParams(window.location.search)
+        //     console.log(x.get('path'));
+        //     fetch("list/"+x.get('path'))
+        //     .then(data=>{return data.json()})
+        //     .then(res=>{
+        //     })
+        // }
+    </script>
+    <script src="script.js"></script>
+</body>
+
+</html>
