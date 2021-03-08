@@ -37,10 +37,14 @@ function GetAllFolders ($base2){
     }
 }
 GetAllFolders $base
+$ProgressPreference = 'SilentlyContinue'
 Write-Output ("`n"+[math]::Round($global:total_size/1000000, 2)+" Mb`n")
+Write-Output ("`n")
 for ($i = 0; $i -lt $global:finalfiles.Count; $i++) {
-    Write-Host  -NoNewline ("`rFiles Remaining: "+($global:finalfiles.Count-($i))+"["+[math]::Round($global:total_size/1000000, 2)+"Mb] ...")
-    Invoke-RestMethod ($url + "/file/" + $global:finalfiles[$i].path) -o ($global:finalfiles[$i].path.Replace($mainpath, ""))
+    Write-Host  -NoNewline ("`nFiles Remaining: "+($global:finalfiles.Count-($i))+"["+[math]::Round($global:total_size/1000000, 2)+"Mb] ... ("+($global:finalfiles[$i].path.Replace($mainpath, ""))+")")
+    if (-not (Test-Path $global:finalfiles[$i].path.Replace($mainpath, ""))) {
+        curl ($url + "/file/" + $global:finalfiles[$i].path) -o ($global:finalfiles[$i].path.Replace($mainpath, ""))
+    }
     if ($global:finalfiles[$i].stats) {
         $global:total_size -= $global:finalfiles[$i].stats.size
     }
