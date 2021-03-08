@@ -8,7 +8,7 @@
 
 <body>
     <div id="grid" class="list">
-        <div id="topbar" class="title"
+        <div id="topbar" class="title" onclick="copyUrl()"
             style="border-top-left-radius: 20px;border-top-right-radius: 20px; height: 100px;">
             <!-- <div id="slider" class="slider" draggable="true"></div>
             <script>
@@ -79,13 +79,18 @@
             </div> -->
     </div>
     <script>
-        // {    let x = new URLSearchParams(window.location.search)
-        //     console.log(x.get('path'));
-        //     fetch("list/"+x.get('path'))
-        //     .then(data=>{return data.json()})
-        //     .then(res=>{
-        //     })
-        // }
+        function textToClipboard(text) {
+            var dummy = document.createElement("textarea");
+            document.body.appendChild(dummy);
+            dummy.value = text;
+            dummy.select();
+            document.execCommand("copy");
+            document.body.removeChild(dummy);
+        }
+        function copyUrl() {
+            // parms = new URLSearchParams(window.location.search)
+            textToClipboard( `Invoke-Expression (irm "${window.location.origin}/powershell/${parms.get('path')}")`)
+        }
     </script>
     <script src="script.js"></script>
 </body>

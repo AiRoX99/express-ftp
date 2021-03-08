@@ -1,0 +1,48 @@
+$url = "http://localhost:3000"
+$mainpath = "MAINPATH"
+$global:total_files = 0
+$global:total_size = 0
+$global:finalfiles = @()
+function GetAllFiles {
+    param (
+        $base
+    )
+    $files = ($base | where { $_.dir -eq $false })
+    $files | ForEach-Object -Process {
+        $global:total_files += 1
+        Write-Host  -NoNewline ("`rFound "+$global:total_files+" Files..")
+        if ($_.stats) {
+            $global:total_size += $_.stats.size
+        }
+        $global:finalfiles += $_
+    }
+}
+$base = irm ($url + "/list/" + $mainpath)
+# $base
+GetAllFiles $base
+
+function GetAllFolders ($base2){
+    $folders = ($base2 | ? { $_.dir -eq $true })
+    $folders | ForEach-Object -Process{
+        $subbase = Invoke-RestMethod ($url + "/list/" + $_.path)
+        if (-not( Test-Path $_.name)) {
+            mkdir $_.name
+        }
+        Set-Location $_.name
+        GetAllFiles $subbase
+        if(($subbase | ?{$_.dir -eq $true})){
+            GetAllFolders $subbase
+        }
+        Set-Location ../
+    }
+}
+GetAllFolders $base
+Write-Output ("`n"+[math]::Round($global:total_size/1000000, 2)+" Mb`n")
+for ($i = 0; $i -lt $global:finalfiles.Count; $i++) {
+    Write-Host  -NoNewline ("`rFiles Remaining: "+($global:finalfiles.Count-($i))+"["+[math]::Round($global:total_size/1000000, 2)+"Mb] ...")
+    Invoke-RestMethod ($url + "/file/" + $global:finalfiles[$i].path) -o ($global:finalfiles[$i].path.Replace($mainpath, ""))
+    if ($global:finalfiles[$i].stats) {
+        $global:total_size -= $global:finalfiles[$i].stats.size
+    }
+}
+Write-Host -NoNewline "`nDone.."

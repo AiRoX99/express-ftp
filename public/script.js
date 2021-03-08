@@ -42,4 +42,4 @@ fetch("list/" + path)
 
 
 
-console.log(window.location);
+console.log(window.location.origin);
