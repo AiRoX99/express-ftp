@@ -50,7 +50,7 @@ app.get('/list/*', (req, res) => {
     var filePath = decodeURI(req.originalUrl).substring(6, 9999)
     if (filePath.endsWith(":")) filePath += "\\"
     if (fs.existsSync(filePath) && fs.lstatSync(filePath).isDirectory()) {
-        console.log(fs.readdirSync(filePath));
+        // console.log(fs.readdirSync(filePath));
         // res.send(fs.readdirSync(filePath).map((x)=>{let isDir; try{isDir = fs.lstatSync(path.join(filePath, x)).isDirectory()}catch{isDir=false}return {name: x, path:path.join(filePath, x), dir: isDir}}))
         res.send(fs.readdirSync(filePath).map((x) => { let stats; try { stats = fs.lstatSync(path.join(filePath, x)) } catch { } return { name: x, path: path.join(filePath, x), dir: stats ? stats.isDirectory() : false, stats: stats } }))
 
@@ -81,4 +81,7 @@ app.get('/explorer', (req, res) => {
     res.sendFile(path.join(__dirname, 'public/index.html'))
     // res.redirect('explorer?path=C:/')
 })
-app.listen(PORT)
+
+app.listen(PORT, ()=>{
+    console.log(`Host started on http:/${getIP()}:${PORT}`);
+})
