@@ -1,3 +1,10 @@
+
+
+/* YOUR PORT GOES HERE */
+const PORT = 5050;
+/* YOUR PORT GOES HERE */
+
+
 const express = require('express');
 const path = require('path')
 const fs = require('fs');
@@ -60,6 +67,7 @@ app.get('/powershell/*', (req, res) => {
         if (!filePath2.endsWith("\\")) filePath2 += "\\"
         powershellScript = powershellScript.replace("MAINPATH", filePath2)
         powershellScript = powershellScript.replace("localhost", getIP())
+        powershellScript = powershellScript.replace("PORT", PORT)
         res.send(powershellScript)
     } else {
         res.status(500).send("File not found")
@@ -73,4 +81,4 @@ app.get('/explorer', (req, res) => {
     res.sendFile(path.join(__dirname, 'public/index.html'))
     // res.redirect('explorer?path=C:/')
 })
-app.listen(3000)
+app.listen(PORT)
