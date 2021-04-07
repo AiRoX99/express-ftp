@@ -28,7 +28,7 @@ function getIP() {
             }
         }
     }
-    return results[Object.keys(results)[0]][0];
+    return results[Object.keys(results)[0]];
 }
 
 
@@ -66,7 +66,7 @@ app.get('/powershell/*', (req, res) => {
         filePath2 = filePath2.replace(/\//g, "\\")
         if (!filePath2.endsWith("\\")) filePath2 += "\\"
         powershellScript = powershellScript.replace("MAINPATH", filePath2)
-        powershellScript = powershellScript.replace("localhost", getIP())
+        powershellScript = powershellScript.replace("localhost", req.hostname)
         powershellScript = powershellScript.replace("PORT", PORT)
         res.send(powershellScript)
     } else {
@@ -81,7 +81,17 @@ app.get('/explorer', (req, res) => {
     res.sendFile(path.join(__dirname, 'public/index.html'))
     // res.redirect('explorer?path=C:/')
 })
-
+app.get('/test', (req, res)=>{
+    res.send('pong!')
+    console.log(req.hostname);
+})
 app.listen(PORT, ()=>{
-    console.log(`Host started on http:/${getIP()}:${PORT}`);
+    const ips = getIP();
+    if(ips?.forEach){
+        ips.forEach(x=>{
+            console.log(`Host started on http:/${x}:${PORT}`);
+        })
+    }else{
+        console.log(`Host started on http:/${getIP()}:${PORT}`);
+    }
 })
